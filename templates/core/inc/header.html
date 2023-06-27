@@ -1,0 +1,35 @@
+<header class="header">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-2">
+                <div class="header__logo">
+                    <a href="{% url 'core:index' %}">
+                        <img src="img/logo.png" alt="">
+                    </a>
+                </div>
+            </div>
+            <div class="col-lg-8">
+                <div class="header__nav">
+                    <nav class="header__menu mobile-menu">
+                        <ul>
+                            {% if active_link == 'home' %}
+                            <li class="active"><a href="{% url 'core:index' %}">Home</a></li>
+                            {% elif active_link == 'browse' %}
+                            <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                            {% elif active_link == 'suggestions' %}
+                            <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                            {% endif %}
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- <div class="col-lg-2">
+                <div class="header__right">
+                    <a href="index.html#" class="search-switch"><span class="icon_search"></span></a>
+                    <a href="login.html"><span class="icon_profile"></span></a>
+                </div>
+            </div> -->
+        </div>
+        <div id="mobile-menu-wrap"></div>
+    </div>
+</header>

@@ -1,0 +1,15 @@
+{% include 'core/inc/head.html' %}
+{% load static %}
+
+<div id="preloder">
+    <div class="loader"></div>
+</div>
+
+{% include 'core/inc/header.html' %}
+
+
+{% block content %}{% endblock content %}
+
+{% include 'core/inc/footer.html' %}
+
+{% block search_modal %}{% endblock search_modal %}
