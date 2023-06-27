@@ -72,21 +72,22 @@
                         <!-- Max 6 Movies -->
                         {% for movie in new_movies %}
                         <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg"
-                                    data-setbg="{{ movie.thumbnail.url }}">
-                                    <!-- <div class="ep">18 / 18</div> -->
-                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                    <div class="view"><i class="fa fa-eye"></i> {{ movie.views_count }}</div>
+                            <a href="{% url 'core:movie_detail' movie.title movie.pk %}">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ movie.thumbnail.url }}">
+                                        <!-- <div class="ep">18 / 18</div> -->
+                                        <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                        <div class="view"><i class="fa fa-eye"></i> {{ movie.views_count }}</div>
+                                    </div>
+                                    <div class="product__item__text">
+                                        <ul>
+                                            <li>Active</li>
+                                            <li>Movie</li>
+                                        </ul>
+                                        <h5><a>{{ movie.title }}</a></h5>
+                                    </div>
                                 </div>
-                                <div class="product__item__text">
-                                    <ul>
-                                        <li>Active</li>
-                                        <li>Movie</li>
-                                    </ul>
-                                    <h5><a href="{% url 'core:movie_detail' movie.pk %}">{{ movie.title }}</a></h5>
-                                </div>
-                            </div>
+                            </a>
                         </div>
                         {% empty %}
                         <h2 class="text-light">No movie found</h2>
@@ -112,19 +113,21 @@
                     <div class="row">
                         {% for movies in new_movies %}
                         <div class="col-lg-4 col-md-6 col-sm-6">
-                            <div class="product__item">
-                                <div class="product__item__pic set-bg" data-setbg="{{ movies.thumbnail.url }}>
-                                    <div class=" ep">18 / 18</div>
-                                <div class="comment"><i class="fa fa-comments"></i> 11</div>
-                                <div class="view"><i class="fa fa-eye"></i> 9141</div>
-                            </div>
-                            <div class="product__item__text">
-                                <ul>
-                                    <li>Active</li>
-                                    <li>Movie</li>
-                                </ul>
-                                <h5><a href="index.html#">Great Teacher Onizuka</a></h5>
-                            </div>
+                            <a href="">
+                                <div class="product__item">
+                                    <div class="product__item__pic set-bg" data-setbg="{{ movies.thumbnail.url }}>
+                                        <div class=" ep">18 / 18</div>
+                                    <div class="comment"><i class="fa fa-comments"></i> 11</div>
+                                    <div class="view"><i class="fa fa-eye"></i> 9141</div>
+                                </div>
+                                <div class="product__item__text">
+                                    <ul>
+                                        <li>Active</li>
+                                        <li>Movie</li>
+                                    </ul>
+                                    <h5><a>Great Teacher Onizuka</a></h5>
+                                </div>
+                            </a>
                         </div>
                     </div>
                     {% empty %}

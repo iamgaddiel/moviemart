@@ -22,7 +22,7 @@ class IndexPage(TemplateView):
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
         context['new_movies'] = Movie.objects.all().reverse().filter()[0: 4]
-        # context['top_views'] = Movie.objects.filter(counter=)
+        context['active_link'] = 'home'
         return context
 
 
@@ -49,6 +49,11 @@ class ListMovie(ListView):
     template_name = 'core/movie_list.html'
     paginate_by = 30
 
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['active_link'] = 'browse'
+        return context
+
 
 class WatchMovie(TemplateView):
     template_name = 'core/movie_watch.html'
@@ -64,6 +69,11 @@ class MovieSuggestView(CreateView):
     template_name = 'core/suggest.html'
     model = MovieSuggestion
     form_class = SuggestionCrateForm
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['active_link'] = 'suggestions'
+        return context
 
 
 def dowload_torrent_file(request, *args, **kwargs) -> HttpResponse:

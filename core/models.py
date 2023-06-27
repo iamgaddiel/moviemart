@@ -42,7 +42,7 @@ class MovieSuggestion(models.Model):
     
 
 class Reviews(models.Model):
-    user = models.ForeignKey(User)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
 
 
