@@ -14,15 +14,15 @@ class Movie(models.Model):
     x_1080 = models.FileField(upload_to=f'torrents/%Y/%m/%d', validators=[validate_file_extension], blank=True)
     x_2160 = models.FileField(upload_to=f'torrents/%Y/%m/%d', validators=[validate_file_extension], blank=True)
     movie_link = models.URLField()
-    # embeded_movie_tag = models.CharField(max_length=500, unique=True)
     thumbnail = models.ImageField(upload_to='thumbnails/%Y/%m/%d')
     realse_year = models.CharField(max_length=5)
     is_trending = models.BooleanField(default=False)
-    views_count = models.IntegerField(default=0)
+    views = models.IntegerField(default=0)
     thriller_link = models.URLField()
     movie_tags = models.CharField(max_length=300, help_text='seprate tags with a "/"')
     movie_type = models.CharField(max_length=20)
     realse_data = models.DateField(null=True)
+    rating = models.CharField(max_length=20, default="1/10", help_text="1/10")
     duration = models.CharField(max_length=30, help_text='duration of movie', default='')
 
 

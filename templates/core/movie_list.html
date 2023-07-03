@@ -42,7 +42,7 @@
                     <div class="row">
                         {% for movie in movies %}
                         <div class="col-lg-3 col-md-4 col-sm-12">
-                            <a href="{% url 'core:movie_detail' movie.title  movie.pk %}">
+                            <a href="{% url 'core:movie_detail' movie.pk %}">
 
                                 <div class="product__item">
                                     <div class="product__item__pic set-bg" data-setbg="{{ movie.thumbnail.url }}">

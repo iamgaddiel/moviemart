@@ -10,6 +10,12 @@
 
 {% block content %}{% endblock content %}
 
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch"><i class="icon_close"></i></div>
+        <form class="search-model-form" method='GET' action='{% url "core:movie_search" %}'>
+            <input type="text" name='q' id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
 {% include 'core/inc/footer.html' %}
-
-{% block search_modal %}{% endblock search_modal %}

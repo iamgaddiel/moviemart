@@ -33,13 +33,18 @@ class MovieDetail(DetailView):
 
     def get(self, *args, **kwargs):
         queryset = Movie.objects.get(id=kwargs.get('pk'))
-        queryset.views_count += 1
+        queryset.views += 1
         queryset.save()
         return super().get(*args, **kwargs)
     
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
+        selected_movie_tag = Movie.objects.get(id=self.kwargs.get('pk')).movie_tags
+        recommended_movies = Movie.objects.filter(
+            movie_tags__icontains=selected_movie_tag
+        )
         context['host'] = self.request.get_host()
+        context['recommended_movies'] = recommended_movies
         return context
 
 
@@ -113,10 +118,18 @@ def dowload_torrent_file(request, *args, **kwargs) -> HttpResponse:
     return response
 
 
-def search_movies(request, *args, **kwargs):
-    query_string = request.GET.get('movie_title')
-    queeryset = Movies.ojbects.filter(title__unaccent__icontains=query_string)
-    context = {
-        'movies': queryset
-    }
-    return render(template_name, context=context)
+class SearchMovies(ListView):
+    template_name = 'core/search_result.html'
+    paginate_by = 16
+    context_object_name = 'movies'
+
+    def get_queryset(self, *args, **kwargs):
+        query_string = self.request.GET.get('q')
+        queryset = Movie.objects.filter(title__icontains=query_string)
+        return queryset
+
+    def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
+        context = super().get_context_data(**kwargs)
+        context['search_parameter'] =  self.request.GET.get('q')
+        return context
+
