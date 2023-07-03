@@ -65,19 +65,29 @@
                             </div>
                         </div>
                         <div class="anime__details__btn">
+                            {% if movie.x_720p != '' %}
                             <a href="{% url 'core:movie_download_torrent' movie.pk 720 %}" class="follow-btn">
                                 <i class="fa fa-heart-o"></i>
                                 720p
                             </a>
+                            {% endif %}
+
+
+                            {% if movie.x_1080 != '' %}
                             <a href="{% url 'core:movie_download_torrent' movie.pk 1080 %}" class="follow-btn">
                                 <i class="fa fa-heart-o"></i>
                                 1080p
                             </a>
+                            {% endif %}
+
+                            {% if movie.x_2160 != '' %}
                             <a href="{% url 'core:movie_download_torrent' movie.pk 2160 %}" class="follow-btn">
                                 <i class="fa fa-heart-o"></i>
                                 2160p
                             </a>
-                            <a href="{% url 'core:movie_watch' movie.pk %}" class="watch-btn"><span>Watch Now</span> <i
+                            {% endif %}
+
+                            <a href="{{ movie.movie_link}}" target='_blank' class="watch-btn"><span>Watch Now</span> <i
                                     class="fa fa-angle-right"></i></a>
                         </div>
                     </div>

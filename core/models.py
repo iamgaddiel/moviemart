@@ -8,12 +8,13 @@ import uuid
 
 class Movie(models.Model):
     id = models.UUIDField(primary_key=True, unique=True, editable=False, default=uuid.uuid4)
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, unique=True)
     description = models.TextField()
     x_720 = models.FileField(upload_to=f'torrents/%Y/%m/%d', validators=[validate_file_extension], blank=True)
     x_1080 = models.FileField(upload_to=f'torrents/%Y/%m/%d', validators=[validate_file_extension], blank=True)
     x_2160 = models.FileField(upload_to=f'torrents/%Y/%m/%d', validators=[validate_file_extension], blank=True)
     movie_link = models.URLField()
+    # embeded_movie_tag = models.CharField(max_length=500, unique=True)
     thumbnail = models.ImageField(upload_to='thumbnails/%Y/%m/%d')
     realse_year = models.CharField(max_length=5)
     is_trending = models.BooleanField(default=False)

@@ -55,8 +55,10 @@ class ListMovie(ListView):
         return context
 
 
-class WatchMovie(TemplateView):
+class WatchMovie(DetailView):
     template_name = 'core/movie_watch.html'
+    model = Movie
+    context_object_name = 'movie'
 
     def get_context_data(self, **kwargs: Any) -> Dict[str, Any]:
         context = super().get_context_data(**kwargs)
@@ -91,7 +93,7 @@ def dowload_torrent_file(request, *args, **kwargs) -> HttpResponse:
 
     if movie_resolution == '720':
         torrent_file_path = Movie.objects.get(id=kwargs.get('pk')).x_720.url
-        
+
     if movie_resolution == '1080':
         torrent_file_path = Movie.objects.get(id=kwargs.get('pk')).x_1080.url
 
@@ -110,3 +112,11 @@ def dowload_torrent_file(request, *args, **kwargs) -> HttpResponse:
 
     return response
 
+
+def search_movies(request, *args, **kwargs):
+    query_string = request.GET.get('movie_title')
+    queeryset = Movies.ojbects.filter(title__unaccent__icontains=query_string)
+    context = {
+        'movies': queryset
+    }
+    return render(template_name, context=context)
