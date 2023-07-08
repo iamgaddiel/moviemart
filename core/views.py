@@ -49,7 +49,6 @@ class MovieDetail(DetailView):
         movie_reviews = Review.objects.filter(movie=viewed_movie)
 
 
-        print(movie_reviews[0].comment, '<---------------')
 
         context['host'] = self.request.get_host()
         context['recommended_movies'] = recommended_movies
