@@ -12,18 +12,46 @@
                 <div class="header__nav">
                     <nav class="header__menu mobile-menu">
                         <ul>
-                            {% if active_link == 'home' %}
-                            <li class="active"><a href="{% url 'core:index' %}">Home</a></li>
-                            <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
-                            <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
-                            {% elif active_link == 'browse' %}
-                            <li><a href="{% url 'core:index' %}">Home</a></li>
-                            <li class="active"><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
-                            <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
-                            {% elif active_link == 'suggestions' %}
-                            <li><a href="{% url 'core:index' %}">Home</a></li>
-                            <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
-                            <li class="active"><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                            {% if not user.is_authenticated %}
+                                {% if active_link == 'home' %}
+                                <li class="active"><a href="{% url 'core:index' %}">Home</a></li>
+                                <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                                {% elif active_link == 'browse' %}
+                                <li><a href="{% url 'core:index' %}">Home</a></li>
+                                <li class="active"><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                                {% elif active_link == 'suggestions' %}
+                                <li><a href="{% url 'core:index' %}">Home</a></li>
+                                <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li class="active"><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li><a href="{% url 'login' %}">Login</a></li>
+                                {% else %}
+                                <li><a href="{% url 'core:index' %}">Home</a></li>
+                                <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li class="active"><a href="{% url 'login' %}">Login</a></li>
+                                {% endif %}
+                                {% else %}
+                                {% if active_link == 'home' %}
+                                <li class="active"><a href="{% url 'core:index' %}">Home</a></li>
+                                <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li class=""><a href="{% url 'logout' %}">Logout</a></li>
+                                {% elif active_link == 'browse' %}
+                                <li><a href="{% url 'core:index' %}">Home</a></li>
+                                <li class="active"><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li class=""><a href="{% url 'logout' %}">Logout</a></li>
+                                {% elif active_link == 'suggestions' %}
+                                <li><a href="{% url 'core:index' %}">Home</a></li>
+                                <li><a href="{% url 'core:movie_list' %}">Browse </span></a></li>
+                                <li class="active"><a href="{% url 'core:movie_suggestion' %}">Suggestions</a></li>
+                                <li class=""><a href="{% url 'logout' %}">Logout</a></li>
+                                {% endif %}
+
                             {% endif %}
                         </ul>
                     </nav>
@@ -31,8 +59,10 @@
             </div>
             <div class="col-lg-2">
                 <div class="header__right">
-                    <span class="search-switch"><i class="icon_search"></i></span>
-                    <!-- <a href="login.html"><span class="icon_profile"></span></a> -->
+                    <span class="search-switch" style="color: #fff"><i class="icon_search"></i></span>
+                    {% if user.authenticated %}
+                    <a href="{% url 'core:index' %}"><span class="icon_profile"></span></a>
+                    {% endif %}
                 </div>
             </div>
         </div>

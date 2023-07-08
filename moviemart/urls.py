@@ -6,7 +6,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('core.urls'))
+    path('', include('core.urls')),
+    path('auth/', include('django.contrib.auth.urls')),
+    path('auth/registeration', include('_authentication.urls'))
+    # path('auth/', include('_authentication.urls'))
 ]
 
 # STatic and Media Files

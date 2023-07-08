@@ -6,7 +6,8 @@ from .views import (
     ListMovie,
     MovieSuggestView,
     dowload_torrent_file,
-    SearchMovies
+    SearchMovies,
+    post_review
 )
 
 
@@ -19,5 +20,6 @@ urlpatterns = [
     path('movie/list/', ListMovie.as_view(), name='movie_list'),
     path('movie/suggestions/', MovieSuggestView.as_view(), name='movie_suggestion'),
     path('movie/download/torrent/<uuid:pk>/<str:resolution>', dowload_torrent_file, name='movie_download_torrent'),
-    path('movie/search', SearchMovies.as_view(), name='movie_search')
+    path('movie/search', SearchMovies.as_view(), name='movie_search'),
+    path('reivew/', post_review, name='add_review'),
 ]

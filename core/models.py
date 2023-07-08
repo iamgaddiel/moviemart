@@ -42,10 +42,11 @@ class MovieSuggestion(models.Model):
         return reverse('core:movie_suggestion', kwargs={'pk': self.pk})
     
 
-class Reviews(models.Model):
+class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     comment = models.TextField()
-
+    movie = models.ForeignKey(to=Movie, on_delete=models.CASCADE)
+    created = models.DateField(auto_created=True)
 
 
     def __str__(self) -> str:

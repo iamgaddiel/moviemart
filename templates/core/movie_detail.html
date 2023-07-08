@@ -1,4 +1,5 @@
 {% extends 'core/template.html' %}
+{% load static %}
 {% block content %}
 
 <div class="breadcrumb-option">
@@ -100,72 +101,34 @@
                     <div class="section-title">
                         <h5>Reviews</h5>
                     </div>
+                    {% for movie_review in reviews %}
                     <div class="anime__review__item">
                         <div class="anime__review__item__pic">
-                            <img src="img/anime/review-1.jpg" alt="">
+                            <img src="{% static 'img/anime/review-4.jpg.webp' %}" alt="avater">
                         </div>
                         <div class="anime__review__item__text">
-                            <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                            <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                "demons" LOL</p>
+                            <h6>{{ movie_review.user.username }} - <span>{{ movie_review.created }}</span></h6>
+                            <p>{{ movie_review.comment }}</p>
                         </div>
                     </div>
-                    <div class="anime__review__item">
-                        <div class="anime__review__item__pic">
-                            <img src="img/anime/review-2.jpg" alt="">
-                        </div>
-                        <div class="anime__review__item__text">
-                            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                            <p>Finally it came out ages ago</p>
-                        </div>
-                    </div>
-                    <div class="anime__review__item">
-                        <div class="anime__review__item__pic">
-                            <img src="img/anime/review-3.jpg" alt="">
-                        </div>
-                        <div class="anime__review__item__text">
-                            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                            <p>Where is the episode 15 ? Slow update! Tch</p>
-                        </div>
-                    </div>
-                    <div class="anime__review__item">
-                        <div class="anime__review__item__pic">
-                            <img src="img/anime/review-4.jpg" alt="">
-                        </div>
-                        <div class="anime__review__item__text">
-                            <h6>Chris Curry - <span>1 Hour ago</span></h6>
-                            <p>whachikan Just noticed that someone categorized this as belonging to the genre
-                                "demons" LOL</p>
-                        </div>
-                    </div>
-                    <div class="anime__review__item">
-                        <div class="anime__review__item__pic">
-                            <img src="img/anime/review-5.jpg" alt="">
-                        </div>
-                        <div class="anime__review__item__text">
-                            <h6>Lewis Mann - <span>5 Hour ago</span></h6>
-                            <p>Finally it came out ages ago</p>
-                        </div>
-                    </div>
-                    <div class="anime__review__item">
-                        <div class="anime__review__item__pic">
-                            <img src="img/anime/review-6.jpg" alt="">
-                        </div>
-                        <div class="anime__review__item__text">
-                            <h6>Louis Tyler - <span>20 Hour ago</span></h6>
-                            <p>Where is the episode 15 ? Slow update! Tch</p>
-                        </div>
-                    </div>
+                    {% empty %}
+                    <h5 style='color: #fff; '>Be the first to give a reivew </h5>
+                    {% endfor %}
                 </div>
+
+                {% if user.is_authenticated %}
                 <div class="anime__details__form">
                     <div class="section-title">
                         <h5>Your Comment</h5>
                     </div>
-                    <form action="anime-details.html#">
-                        <textarea placeholder="Your Comment"></textarea>
+                    <form action="{% url 'core:add_review' %}" method='POST'>
+                        {% csrf_token %}
+                        <textarea placeholder="Your Comment" name='comment' required></textarea>
+                        <input type="hidden" name="movie" value='{{ movie.pk }}'>
                         <button type="submit"><i class="fa fa-location-arrow"></i> Review</button>
                     </form>
                 </div>
+                {% endif %}
             </div>
             <div class="col-lg-4 col-md-4">
                 <div class="anime__details__sidebar">
